@@ -112,6 +112,7 @@ div.desc {
   text-align: center;
 }
 
+
 </style>
 </head>
 <body>
@@ -191,14 +192,15 @@ function searchPostInfo(i,txt) {
           */
 
     //var datastring=""
+    
   var filepath='./Data/PostInfo'+i.toString()
     fetch(filepath).then(response => {
       return response.text();
     }).then(data => {
       console.log("raw data",data);
-      //datastring=data.replace("\n", "<br>");
+      var datastring=data.replace("\n", "<br>");
 
-      const obj = JSON.parse(data);
+      const obj = JSON.parse(datastring);
 
       addPost(obj)
 
@@ -208,11 +210,18 @@ function searchPostInfo(i,txt) {
       console.log(err);
     });
 
+/*
+  var data = '{"Name":"neopasar","Link":"https://conciergecarwash.com.au/","Text":"Book Premium Car Wash Service at Concierge\n\nAre you looking for quality car wash and detailing services? Your search ends here at Concierge Car Wash since we bring you a range of hand car washing and detailing services in Australia. Our team of experts are passionate about automobile and love restoring your vehicle’s beauty and gloss. We use our skills and advanced tools to turn your ride into a shiny and glossy one. Contact us to know more about us. \nFor more details you can visit here also https://conciergecarwash.com.au/","AttachmentArray":["4ddba6ece3526c7ae2daf496fa5332ef7b7a1a21594a37f1380228f74c96c5f2"],"Like":31847,"Dislike":59}'; 
+  var datastring=replaceAll(data,"\n", "<br>");
+  const obj = JSON.parse(datastring);
 
-  //var json = '{"Name":"sexytv","Link":"","Text":"line1 coooline2 superrooolliine3 3333\n33333line4 444444444444","AttachmentArray":["4ddba6ece3526c7ae2daf496fa5332ef7b7a1a21594a37f1380228f74c96c5f2"]}'; 
+  addPost(obj)
+ */
 
- 
+}
 
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
 }
 
 function addPost(obj ){
@@ -221,7 +230,8 @@ function addPost(obj ){
   //opened.event.target="_parent"
   //h1.onclick = detailsPage
   h1.addEventListener('click', detailsPage, false);
-	h1.innerHTML='<table><tr ><td><img src="'+'Data/DataFiles/'+obj.AttachmentArray[0]+'" style="height:200px;"></img></td><td style="display:inline-block;word-wrap:break-word;overflow-wrap: break-word;width:1000px;">2222</td></tr></table>'
+  var descriptionHTML=obj.Name+'<br>'+'<a href="'+obj.Link+'">'+obj.Link+'</a>'+'<br>'+'<i class="fa fa-thumbs-up"></i>'+' '+obj.Like+'  '+'<i class="fa fa-thumbs-down"></i>'+' '+obj.Dislike+'  '+'<br>'+obj.Text
+	h1.innerHTML='<table><tr ><td><img src="'+'Data/DataFiles/'+obj.AttachmentArray[0]+'" style="height:200px;"></img></td><td style="display:inline-block;word-wrap:break-word;overflow-wrap: break-word;width:1000px;">'+descriptionHTML+'</td></tr></table>'
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].textContent = "111111111111**********************************************************************************************************111111111111111111111111";
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].innerHTML =obj.Text
         document.getElementById("gallery").append(h1);
