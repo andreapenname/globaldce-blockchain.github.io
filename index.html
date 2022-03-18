@@ -229,8 +229,10 @@ function addPost(obj ){
 	var h1 = document.createElement('div');
   h1.setAttribute('class', 'galleryitem');
   //opened.event.target="_parent"
-  //h1.onclick = detailsPage
-  h1.addEventListener('click', detailsPage, false);
+  h1.onclick = function(){
+    detailsPage(obj)
+  } 
+  //h1.addEventListener('click', detailsPage(obj), false);
   var descriptionText=""
   if (obj.Text.length<400) {
     descriptionText=obj.Text
@@ -247,12 +249,14 @@ function addPost(obj ){
 
 }
 //---------------------------------------------
-function detailsPage(e){
+function detailsPage(obj){
 
 
-	var opened =window.open("");
-	
-	opened.document.write("<html><head><title>MyTitle</title></head><body>test</body></html>");
+	var opened =window.open("","details");
+	var detailsHTML='<html><head><title>'+obj.Name+'</title></head><body>'+obj.Text+'<br>'
+  detailsHTML+='<img src="'+'Data/DataFiles/'+obj.AttachmentArray[0]+'" style="height:200px;"></img>'
+  detailsHTML+="</body></html>"
+	opened.document.write(detailsHTML);
 
 }
     </script>
