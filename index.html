@@ -196,7 +196,7 @@ function searchPostInfo(i,txt) {
       return response.text();
     }).then(data => {
       console.log("raw data",data);
-      data=data.replace("\n", "<br>");
+      //datastring=data.replace("\n", "<br>");
 
       const obj = JSON.parse(data);
 
