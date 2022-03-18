@@ -122,7 +122,7 @@ div.desc {
   <a class="active" href="./index.html">Home</a>
   <a href="./contact.html">Contact</a>
   <div class="search-container">
-    <form action="javascript:searchInit(this.searchobj)">
+    <form action="javascript:searchInit(this.searchobj.value)">
       <input type="text" placeholder="Search.." id="searchobj">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -150,76 +150,75 @@ div.desc {
 
 
     <script>
-	createItem()
-	createItem()
-	createItem()
-	createItem()
+  const MaxPostId=8
+  for (let i = 0; i < MaxPostId; i++) {
+    searchPostInfo(i,searchtextstring)
+  } 
 
 
 
-function searchInit(searchobj){
+function searchInit(searchtextstring){
 	document.getElementById("gallery").innerHTML = "";
-	document.getElementById("searchtext").textContent = "Search for: "+searchobj.value;
-	createItem()
-	createItem()
-	createItem()
+	document.getElementById("searchtext").textContent = "Search for: "+searchtextstring;
+  for (let i = 0; i < MaxPostId; i++) {
+    searchPostInfo(i,searchtextstring)
+  } 
 }
-      function createItem() {
 
 
 
-	/*
-        var h1 = document.createElement('div');
-        //h1.textContent = "New"
-        h1.setAttribute('class', 'galleryitem');
+function searchPostInfo(i,txt) {
+    /*
+          var h1 = document.createElement('div');
+          //h1.textContent = "New"
+          h1.setAttribute('class', 'galleryitem');
 
-        var a = document.createElement('a');
-        a.title = "my title text";
-        a.href = "http://example.com";
-        var img1=document.createElement('img');
-        img1.setAttribute('src', '123.jpeg')
-        a.append(img1)
+          var a = document.createElement('a');
+          a.title = "my title text";
+          a.href = "http://example.com";
+          var img1=document.createElement('img');
+          img1.setAttribute('src', '123.jpeg')
+          a.append(img1)
 
-	h1.appendChild(a);
-
-
-
-        var desc1=document.createElement('div');
-        desc1.setAttribute('class', 'desc')
-        desc1.textContent = "New"
-        h1.append(desc1)
-        */
-
-	//var datastring=""
-/*
-	fetch('file:///home/gutenberg/Documents/snap/data.txt').then(response => {
-		return response.json();
-	}).then(data => {
-		addPost(data)
-		console.log(data);
-	}).catch(err => {
-		// Do something for an error here
-		console.log(err);
-	});
-*/
-
-var json = '{"Name":"sexytv","Link":"","Text":"line1 coooline2 superrooolliine3 3333\n33333line4 444444444444","AttachmentArray":["4ddba6ece3526c7ae2daf496fa5332ef7b7a1a21594a37f1380228f74c96c5f2"]}'; 
-
-json=json.replace("\n", "<br>");
-
-const obj = JSON.parse(json);
-
-addPost(obj)
+    h1.appendChild(a);
 
 
-      }
+
+          var desc1=document.createElement('div');
+          desc1.setAttribute('class', 'desc')
+          desc1.textContent = "New"
+          h1.append(desc1)
+          */
+
+    //var datastring=""
+  var filepath='./Data/PostInfo'+i.toString()
+    fetch(filepath).then(response => {
+      return response.json();
+    }).then(data => {
+      addPost(data)
+      //console.log(data);
+    }).catch(err => {
+      // Do something for an error here
+      console.log(err);
+    });
+
+
+  //var json = '{"Name":"sexytv","Link":"","Text":"line1 coooline2 superrooolliine3 3333\n33333line4 444444444444","AttachmentArray":["4ddba6ece3526c7ae2daf496fa5332ef7b7a1a21594a37f1380228f74c96c5f2"]}'; 
+
+  json=json.replace("\n", "<br>");
+
+  const obj = JSON.parse(json);
+
+  addPost(obj)
+
+}
 
 function addPost(obj ){
 	var h1 = document.createElement('div');
- h1.setAttribute('class', 'galleryitem');
-//opened.event.target="_parent"
-//h1.onclick = detailsPage
-h1.addEventListener('click', detailsPage, false);
+  h1.setAttribute('class', 'galleryitem');
+  //opened.event.target="_parent"
+  //h1.onclick = detailsPage
+  h1.addEventListener('click', detailsPage, false);
 	h1.innerHTML='<table><tr ><td><img src="'+'Data/DataFiles/'+obj.AttachmentArray[0]+'" style="height:200px;"></img></td><td style="display:inline-block;word-wrap:break-word;overflow-wrap: break-word;width:1000px;">2222</td></tr></table>'
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].textContent = "111111111111**********************************************************************************************************111111111111111111111111";
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].innerHTML =obj.Text
