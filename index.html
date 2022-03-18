@@ -193,7 +193,7 @@ function searchPostInfo(i,txt) {
     //var datastring=""
   var filepath='./Data/PostInfo'+i.toString()
     fetch(filepath).then(response => {
-      return response.json();
+      return response;
     }).then(data => {
       data=data.replace("\n", "<br>");
 
