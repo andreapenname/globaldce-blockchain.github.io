@@ -193,15 +193,16 @@ function searchPostInfo(i,txt) {
     //var datastring=""
   var filepath='./Data/PostInfo'+i.toString()
     fetch(filepath).then(response => {
-      return response;
+      return response.text();
     }).then(data => {
+      console.log("raw data",data);
       data=data.replace("\n", "<br>");
 
       const obj = JSON.parse(data);
 
       addPost(obj)
 
-      //console.log(data);
+      //
     }).catch(err => {
       // Do something for an error here
       console.log(err);
