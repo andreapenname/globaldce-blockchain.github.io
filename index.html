@@ -98,7 +98,7 @@ div.galleryitem {
   border: 1px solid #ccc;
   float: left;
   width: 100%;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 div.galleryitem:hover {
@@ -240,7 +240,7 @@ function addPost(obj ){
     descriptionText=(obj.Text).slice(0, 400)+"  ...";
   }
     
-  var descriptionHTML=obj.Name+'<br>'+'<a href="'+obj.Link+'">'+obj.Link+'</a>'+'<br>'+'<p><span class="fa fa-thumbs-up"></span>&ensp;'+obj.Like+'&ensp;<span class="fa fa-thumbs-down"></span>&ensp;'+obj.Dislike+'</p>'+'<br>'+descriptionText
+  var descriptionHTML=obj.Name+'<br>'+'<a href="'+obj.Link+'">'+obj.Link+'</a>'+'<br>'+'<p><span class="fa fa-thumbs-up"></span>&ensp;&ensp;'+obj.Like+'&ensp;<span class="fa fa-thumbs-down"></span>&ensp;&ensp;'+obj.Dislike+'</p>'+'<br>'+descriptionText
 	h1.innerHTML='<table><tr ><td><img src="'+'Data/DataFiles/'+obj.AttachmentArray[0]+'" style="height:200px;"></img></td><td style="display:inline-block;word-wrap:break-word;overflow-wrap: break-word;width:100%;">'+descriptionHTML+'</td></tr></table>'
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].textContent = "111111111111**********************************************************************************************************111111111111111111111111";
 	//h1.getElementsByTagName('table')[0].rows[0].cells[1].innerHTML =obj.Text
