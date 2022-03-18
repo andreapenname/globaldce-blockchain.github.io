@@ -152,7 +152,7 @@ div.desc {
     <script>
   const MaxPostId=8
   for (let i = 0; i < MaxPostId; i++) {
-    searchPostInfo(i,searchtextstring)
+    searchPostInfo(i,"")
   } 
 
 
@@ -195,7 +195,12 @@ function searchPostInfo(i,txt) {
     fetch(filepath).then(response => {
       return response.json();
     }).then(data => {
-      addPost(data)
+      data=data.replace("\n", "<br>");
+
+      const obj = JSON.parse(data);
+
+      addPost(obj)
+
       //console.log(data);
     }).catch(err => {
       // Do something for an error here
@@ -205,11 +210,7 @@ function searchPostInfo(i,txt) {
 
   //var json = '{"Name":"sexytv","Link":"","Text":"line1 coooline2 superrooolliine3 3333\n33333line4 444444444444","AttachmentArray":["4ddba6ece3526c7ae2daf496fa5332ef7b7a1a21594a37f1380228f74c96c5f2"]}'; 
 
-  json=json.replace("\n", "<br>");
-
-  const obj = JSON.parse(json);
-
-  addPost(obj)
+ 
 
 }
 
